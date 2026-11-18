@@ -10,11 +10,11 @@
 #ifndef HBWLinkInfoEventActuator_h
 #define HBWLinkInfoEventActuator_h
 
-#include "HBWired.h"
+#include "HBWLink.h"
 
 
 template<uint8_t numLinks, uint16_t eepromStart>
-class HBWLinkInfoEventActuator : public HBWLinkReceiver {
+class HBWLinkInfoEventActuator : public HBWLink {
   public:
       HBWLinkInfoEventActuator();
       void receiveInfoEvent(HBWDevice* device, uint32_t senderAddress, uint8_t senderChannel, 

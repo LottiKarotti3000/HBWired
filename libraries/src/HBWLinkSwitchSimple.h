@@ -10,11 +10,11 @@
 #ifndef HBWLinkSwitchSimple_h
 #define HBWLinkSwitchSimple_h
 
-#include "HBWired.h"
+#include "HBWLink.h"
 
 
 template<uint8_t numLinks, uint16_t eepromStart>
-class HBWLinkSwitchSimple : public HBWLinkReceiver {
+class HBWLinkSwitchSimple : public HBWLink {
   public:
       HBWLinkSwitchSimple();
 	  void receiveKeyEvent(HBWDevice* device, uint32_t senderAddress, uint8_t senderChannel, 

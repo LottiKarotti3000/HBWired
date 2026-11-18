@@ -26,15 +26,15 @@ void HBWLinkKey<numLinks, eepromStart>::sendKeyEvent(HBWDevice* device, uint8_t 
     // care for peerings
 	for(int i = 0; i < numLinks; i++) {
 		// get channel number
-		device->readEEPROM(&channelEEPROM, eepromStart + EEPROM_SIZE * i, 1);
+		readLinkField(device, &channelEEPROM, eepromStart, EEPROM_SIZE, i, 0);
 		// valid peering?
 		// TODO: Really like that? This always goes through all possible peerings
 		if(channelEEPROM == 0xFF) continue;
 		// channel is key?
 		if(channelEEPROM != srcChan) continue;
 		// get address and channel of actuator
-		device->readEEPROM(&addrEEPROM, eepromStart + EEPROM_SIZE * i + 1, 4, true);
-		device->readEEPROM(&channelEEPROM, eepromStart + EEPROM_SIZE * i +5, 1);
+		readLinkField(device, &addrEEPROM, eepromStart, EEPROM_SIZE, i, 1, 4, true);
+		readLinkField(device, &channelEEPROM, eepromStart, EEPROM_SIZE, i, 5);
 		// own address? -> internal peering
 		if(addrEEPROM == device->getOwnAddress()) {
 			device->receiveKeyEvent(addrEEPROM, srcChan, channelEEPROM, keyPressNum, longPress);

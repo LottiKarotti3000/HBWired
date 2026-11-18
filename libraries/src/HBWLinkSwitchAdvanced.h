@@ -11,15 +11,15 @@
 #ifndef HBWLinkSwitchAdvanced_h
 #define HBWLinkSwitchAdvanced_h
 
-#include "HBWired.h"
+#include "HBWLink.h"
 
 
 template<uint8_t numLinks, uint16_t eepromStart>
-class HBWLinkSwitchAdvanced : public HBWLinkReceiver {
+class HBWLinkSwitchAdvanced : public HBWLink {
   public:
     HBWLinkSwitchAdvanced();
 	  void receiveKeyEvent(HBWDevice* device, uint32_t senderAddress, uint8_t senderChannel, 
-                           uint8_t targetChannel, uint8_t keyPressNum, boolean longPress);				
+                           uint8_t targetChannel, uint8_t keyPressNum, boolean longPress);
 
   private:
       uint32_t lastSenderAddress;

@@ -7,15 +7,14 @@
 **
 */
 
-
 #ifndef HBWLinkKey_h
 #define HBWLinkKey_h
 
-#include "HBWired.h"
+#include "HBWLink.h"
 
 
 template<uint8_t numLinks, uint16_t eepromStart>
-class HBWLinkKey : public HBWLinkSender {
+class HBWLinkKey : public HBWLink {
   public:
       HBWLinkKey();
 	  void sendKeyEvent(HBWDevice* device, uint8_t srcChan, uint8_t keyPressNum, boolean longPress);

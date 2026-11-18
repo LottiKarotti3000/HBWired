@@ -25,20 +25,19 @@ void HBWLinkInfoEventActuator<numLinks, eepromStart>::receiveInfoEvent(HBWDevice
   
   // read what to do from EEPROM
   for(byte i = 0; i < numLinks; i++) {
-	  device->readEEPROM(&sndAddrEEPROM, eepromStart + EEPROM_SIZE * i, 4, true);
+	  readLinkField(device, &sndAddrEEPROM, eepromStart, EEPROM_SIZE, i, 0, 4, true);
 	  // TODO: is the following really ok?
 	  //       it reads to all links, even if none is set 
 	  if(sndAddrEEPROM == 0xFFFFFFFF) continue;
 	  if(sndAddrEEPROM != senderAddress) continue;
 	  // compare sender channel
-	  device->readEEPROM(&channelEEPROM, eepromStart + EEPROM_SIZE * i + 4, 1);
+	  readLinkField(device, &channelEEPROM, eepromStart, EEPROM_SIZE, i, 4);
 	  if(channelEEPROM != senderChannel) continue;
 	  // compare target channel
-	  device->readEEPROM(&channelEEPROM, eepromStart + EEPROM_SIZE * i + 5, 1);
+	  readLinkField(device, &channelEEPROM, eepromStart, EEPROM_SIZE, i, 5);
 	  if(channelEEPROM != targetChannel) continue;
 	  // ok, we have found a match
 
-	  
 	  device->setInfo(targetChannel, length, data);    // channel, data length, data
   }
 }
